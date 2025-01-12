@@ -5,14 +5,9 @@ import secrets from "./config/secret";
 import middleware from "./shared/middleware";
 import routes from "./shared/route";
 import logger from "node-color-log";
-import http from "http";
 
 const app = express();
 const PORT = secrets.PORT;
-
-const httpServer = http.createServer(app);
-
-
 
 app.get("/", async (_, res) => {
   res.status(200).json({
@@ -25,7 +20,7 @@ app.use(middleware); // implement middleware
 
 connectDB(); // database connection
 
-app.use("/api/v1", routes); // define routes
+app.use("/api", routes); // define routes
 
 // catch global error
 app.use((error: any, _req: Request, res: Response, _: NextFunction) => {
