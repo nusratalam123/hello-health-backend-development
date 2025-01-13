@@ -9,15 +9,7 @@ export const signup = async (
   next: NextFunction,
 ) => {
   try {
-    const { email } = req.body;
-    const user = await User.findOne({ email: email });
-
-    if (user) {
-      return res.status(400).json({
-        message: "email already exist",
-      });
-    }
-
+    
     const savedUser = await User.create(req.body);
     await savedUser.save({ validateBeforeSave: false });
 
@@ -36,15 +28,15 @@ export const login = async (
   next: NextFunction,
 ) => {
   try {
-    const { email, password } = req.body;
+    const { name, password } = req.body;
 
-    if (!email || !password) {
+    if (!name || !password) {
       return res.status(400).json({
         message: "Please provide your credentials",
       });
     }
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ name:name });
 
     if (!user) {
       return res.status(400).json({
@@ -93,6 +85,31 @@ export const logout = async (
 
     res.status(200).json({
       message: "Logout successful",
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+
+export const loggedInUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+     // @ts-expect-error: Assuming req.authId is set by authentication middleware
+     const userID = req.authId;
+
+     const user = await User.find({_id:userID});
+
+     if (!user) {
+       res.status(400).json({
+         message: "User not found",
+       });
+     };
+    res.status(200).json({
+      message: "get Logged in user successfully",
     });
   } catch (err) {
     next(err);
