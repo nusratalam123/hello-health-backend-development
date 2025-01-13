@@ -5,14 +5,7 @@ import validator from "validator";
 
 const userSchema = new mongoose.Schema(
   {
-    firstName: {
-      type: String,
-      required: true,
-      trim: true,
-      minLength: [3, "name must be at least 3 characters"],
-      maxLength: [100, "name is too large"],
-    },
-    lastName: {
+    name: {
       type: String,
       required: true,
       trim: true,
@@ -25,17 +18,11 @@ const userSchema = new mongoose.Schema(
       trim: true,
       lowercase: true,
       unique: true,
-      required: [true, "email address is required"],
     },
     password: {
       type: String,
       required: [true, "password is required"],
       minLength: [6, "password must be at least 6 characters"],
-    },
-    role: {
-      type: String,
-      default: "USER",
-      enum: ["USER", "SELLER"],
     },
     phone: {
       type: String,
@@ -45,37 +32,24 @@ const userSchema = new mongoose.Schema(
       ],
       required: false,
     },
-    secondaryPhone: {
-      type: String,
-      validate: [
-        validator.isMobilePhone,
-        "please provide a valid phone number",
-      ],
+    age: {
+      type: Number,
       required: false,
     },
-    city: {
-      type: String,
+    deviceId: {
+      type: Number,
       required: false,
     },
-    zipCode: {
+    role: {
       type: String,
-      required: false,
-    },
-    shippingCountry: {
-      type: String,
-      required: false,
+      default: "USER",
+      enum: ["USER", "ADMIN"],
     },
     status: {
       type: String,
       default: "ACTIVE",
       enum: ["ACTIVE", "BANNED"],
     },
-    confirmationToken: String,
-    confirmationTokenExpires: Date,
-
-    passwordChangedAt: Date,
-    passwordResetToken: String,
-    passwordResetExpires: Date,
   },
   {
     timestamps: true,
