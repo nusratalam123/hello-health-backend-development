@@ -122,10 +122,12 @@ export const analyzeHealthData = async (req: Request, res: Response) => {
 // Controller to get single user health data by userId
 export const getSingleUserHealthData = async (req: Request, res: Response) => {
     try {
-      const { userId } = req.params;
+      const { userID } = req.params;
+      console.log('User ID:', userID);
   
       // Find health data by userId
-      const healthData = await HealthSuggestionData.findOne({ userId });
+      const healthData = await HealthSuggestionData.findOne({ userID: userID });
+      console.log('Health Data:', healthData);
   
       if (!healthData) {
         return res.status(404).json({ message: 'Health data not found for this user' });

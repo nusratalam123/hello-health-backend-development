@@ -4,7 +4,7 @@ import {  analyzeHealthData, getSingleUserHealthData } from '../controller/healt
 const router = express.Router();
 
 // Route to get single user health data by userId
-router.get('/user/:userId', getSingleUserHealthData);
+router.get('/user/:userID', getSingleUserHealthData);
 // Route to handle health data submission with image upload
 router.post('/analyze',  analyzeHealthData);
 
