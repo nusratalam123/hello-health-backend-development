@@ -2,12 +2,12 @@ import { Request, Response } from 'express';
 import Product from '../model/product.model';
 import cloudinary from 'cloudinary';
 
-// Configure Cloudinary
-cloudinary.v2.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME, // Replace with your Cloudinary cloud name
-      api_key: process.env.CLOUDINARY_API_KEY,       // Replace with your Cloudinary API key
-      api_secret: process.env.CLOUDINARY_API_SECRET  // Replace with your Cloudinary API secret
-  });
+// // Configure Cloudinary
+// cloudinary.v2.config({
+//     cloud_name: process.env.CLOUDINARY_CLOUD_NAME, // Replace with your Cloudinary cloud name
+//       api_key: process.env.CLOUDINARY_API_KEY,       // Replace with your Cloudinary API key
+//       api_secret: process.env.CLOUDINARY_API_SECRET  // Replace with your Cloudinary API secret
+//   });
 
 // Add a product
 export const addProduct = async (req: Request, res: Response) => {
@@ -19,16 +19,13 @@ export const addProduct = async (req: Request, res: Response) => {
       return res.status(400).json({ message: 'Image is required' });
     }
 
-    // Upload the image to Cloudinary
-    const result = await cloudinary.v2.uploader.upload(req.file.path);
-
     // Create and save the product
     const newProduct = new Product({
       name,
       description,
       price,
       quantity,
-      image: result.secure_url,
+      image: req.file.path,
     });
 
     await newProduct.save();
