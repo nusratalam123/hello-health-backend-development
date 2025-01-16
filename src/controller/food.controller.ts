@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { Food } from '../model/food.model';
-import cloudinary from 'cloudinary';
+
 
 
 // Add a new food item

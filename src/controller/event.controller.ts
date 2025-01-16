@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { Event } from '../model/event.model';
-import cloudinary from 'cloudinary';
+
 
 
 // Controller to add a new event

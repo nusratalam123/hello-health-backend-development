@@ -1,8 +1,6 @@
 import { Router } from 'express';
-import multer from 'multer';
 import { addFood, getGoodFoods, getHighRiskFoods } from '../controller/food.controller';
 import upload from '../config/cloudinaryConfig';
-
 
 const router = Router();
 
