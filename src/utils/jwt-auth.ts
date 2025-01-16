@@ -10,8 +10,13 @@ export async function jwtAuth(req: Request, res: Response, next: NextFunction) {
   if (
     req.path.endsWith("/login") ||
     req.path.endsWith("/signup") ||
-    req.path.match(/^\/api\/doctor\/.+/) || // server REGEX
-    !req.path.includes("/api")
+    req.path.endsWith("/list") ||
+    req.path.match(/^\/api\/product\/.+/) || // testimonial REGEX
+    req.path.match(/^\/api\/testimonial\/.+/) || // testimonial REGEX
+    req.path.match(/^\/api\/event"\/.+/) || // event REGEX
+    req.path.match(/^\/api\/health-suggestion"\/.+/) || // health -suggestion REGEX
+    req.path.match(/^\/api\/doctor\/.+/) || // doctor REGEX
+    !req.path.includes("/api/v1")
   ) {
     next();
     return;
