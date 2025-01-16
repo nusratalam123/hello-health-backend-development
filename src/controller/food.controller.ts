@@ -2,12 +2,6 @@ import { Request, Response } from 'express';
 import { Food } from '../model/food.model';
 import cloudinary from 'cloudinary';
 
-// Configure Cloudinary
-cloudinary.v2.config({
-  cloud_name: 'df2noz2oi', // Replace with your Cloudinary cloud name
-    api_key: '682876424274112',       // Replace with your Cloudinary API key
-    api_secret: 'cN3-Fx0Ejqob0ZEFSdYwrUtnotc'  // Replace with your Cloudinary API secret
-});
 
 // Add a new food item
 export const addFood = async (req: Request, res: Response) => {
@@ -18,15 +12,15 @@ export const addFood = async (req: Request, res: Response) => {
       return res.status(400).json({ message: 'Image file is required' });
     }
 
-    // Upload image to Cloudinary
-    const result = await cloudinary.v2.uploader.upload(req.file.path);
+    // // Upload image to Cloudinary
+    // const result = await cloudinary.v2.uploader.upload(req.file.path);
 
     // Create a new food item
     const food = new Food({
       name,
       benefit,
       type,
-      image: result.secure_url // Use the URL returned by Cloudinary
+      image: req.file.path// Use the URL returned by Cloudinary
     });
 
     await food.save();

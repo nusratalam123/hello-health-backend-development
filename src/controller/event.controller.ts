@@ -2,12 +2,6 @@ import { Request, Response } from 'express';
 import { Event } from '../model/event.model';
 import cloudinary from 'cloudinary';
 
-// Configure Cloudinary
-cloudinary.v2.config({
-    cloud_name: 'df2noz2oi', // Replace with your Cloudinary cloud name
-    api_key: '682876424274112',       // Replace with your Cloudinary API key
-    api_secret: 'cN3-Fx0Ejqob0ZEFSdYwrUtnotc'  // Replace with your Cloudinary API secret
-});
 
 // Controller to add a new event
 export const addEvent = async (req: Request, res: Response) => {
@@ -24,12 +18,12 @@ export const addEvent = async (req: Request, res: Response) => {
         return res.status(400).json({ message: 'Only JPG, JPEG, and PNG files are allowed' });
       }
   
-      // Upload image to Cloudinary
-      const result = await cloudinary.v2.uploader.upload(req.file.path);
-      const imageUrl = result.secure_url;
+      // // Upload image to Cloudinary
+      // const result = await cloudinary.v2.uploader.upload(req.file.path);
+      // const imageUrl = result.secure_url;
   
 
-    const event = new Event({ date, title, description, image: imageUrl });
+    const event = new Event({ date, title, description, image: req.file.path });
     await event.save();
 
     res.status(201).json({ message: 'Event added successfully', event });

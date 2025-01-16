@@ -2,12 +2,6 @@ import { Doctor } from '../model/doctor.model';
 import cloudinary from 'cloudinary';
 import { NextFunction, Request, Response } from "express";
 
-// Configure Cloudinary
-cloudinary.v2.config({
-    cloud_name: 'df2noz2oi', // Replace with your Cloudinary cloud name
-    api_key: '682876424274112',       // Replace with your Cloudinary API key
-    api_secret: 'cN3-Fx0Ejqob0ZEFSdYwrUtnotc'  // Replace with your Cloudinary API secret
-});
 
 interface Filter {
     hospital?: { $regex: string, $options: string };
@@ -73,11 +67,7 @@ export const addDoctor = async (req:Request, res:Response) => {
         return res.status(400).json({ message: 'Only JPG, JPEG, and PNG files are allowed' });
       }
   
-      // Upload image to Cloudinary
-      const result = await cloudinary.v2.uploader.upload(req.file.path);
-      const imageUrl = result.secure_url;
-  
-      const doctor = new Doctor({ name, specialty, hospital, image: imageUrl });
+      const doctor = new Doctor({ name, specialty, hospital, image: req.file.path });
       await doctor.save();
   
       res.status(201).json({ message: 'Doctor added successfully', doctor });
