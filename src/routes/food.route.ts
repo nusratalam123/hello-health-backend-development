@@ -1,9 +1,10 @@
 import { Router } from 'express';
 import multer from 'multer';
 import { addFood, getGoodFoods, getHighRiskFoods } from '../controller/food.controller';
+import upload from '../config/cloudinaryConfig';
+
 
 const router = Router();
-const upload = multer({ dest: 'uploads/' }); 
 
 // Route to add a new food item (with image upload)
 router.post('/add', upload.single('image'), addFood);
