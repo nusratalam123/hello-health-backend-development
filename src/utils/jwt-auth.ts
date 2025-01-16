@@ -10,14 +10,8 @@ export async function jwtAuth(req: Request, res: Response, next: NextFunction) {
   if (
     req.path.endsWith("/login") ||
     req.path.endsWith("/signup") ||
-    req.path.endsWith("/reset-password") ||
-    req.path.endsWith("/reset-password-app") ||
-    req.path.endsWith("/forget-password") ||
-    req.path.endsWith("/send-otp") ||
-    req.path.endsWith("/verify-otp") ||
-    req.path.match(/^\/api\/v1\/doctor\/.+/) || // server REGEX
-    req.path.match(/^\/api\/v1\/guest\/.+/) || // guest REGEX
-    !req.path.includes("/api/v1")
+    req.path.match(/^\/api\/doctor\/.+/) || // server REGEX
+    !req.path.includes("/api")
   ) {
     next();
     return;
