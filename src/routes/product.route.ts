@@ -1,9 +1,9 @@
 import express from 'express';
 import multer from 'multer';
 import { addProduct, getAllProducts, getProductById } from '../controller/product.controller';
+import upload from '../config/cloudinaryConfig';
 
 const router = express.Router();
-const upload = multer({ dest: 'uploads/' }); // Temporary storage for images
 
 // Add a new product (with image upload)
 router.post('/add', upload.single('image'), addProduct);
