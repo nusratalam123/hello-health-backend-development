@@ -8,12 +8,11 @@ import path from "path";
 const app = express();
 
 //middleware
-app.use(
-  cors({
-    origin: "*", // Replace with your frontend URL
-    credentials: true, // Allow cookies and credentials
-  })
-);
+app.use(cors({
+  origin: 'https://hello-health-iosf-git-main-nusrat-alams-projects.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true // If cookies or credentials are required
+}));
 app.use(cookieParser());
 app.use(express.json());
 app.use(morgan("dev"));
