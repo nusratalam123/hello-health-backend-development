@@ -10,8 +10,7 @@ const app = express();
 //middleware
 //Allowed origins for CORS
 const allowedOrigins = [
-  "http://localhost:3000", 
-  "https://hello-health-iosf-qia8j8ft7-nusrat-alams-projects.vercel.app", 
+  "*",  
 ];
 
 app.use(
