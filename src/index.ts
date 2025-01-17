@@ -16,7 +16,7 @@ app.get("/", async (_, res) => {
   });
 });
 
-app.use(middleware); // implement middleware
+app.use(middleware); // implement middleware update
 
 connectDB(); // database connection
 

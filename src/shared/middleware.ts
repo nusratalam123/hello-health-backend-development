@@ -8,12 +8,26 @@ import path from "path";
 const app = express();
 
 //middleware
+//Allowed origins for CORS
+const allowedOrigins = [
+  "http://localhost:3000", 
+  "https://hello-health-iosf-qia8j8ft7-nusrat-alams-projects.vercel.app", 
+];
+
 app.use(
   cors({
-    origin: "*", // Replace with your frontend URL
-    credentials: true, // Allow cookies and credentials
+    origin: (origin, callback) => {
+      // Allow requests with no origin (e.g., mobile apps or Postman)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true, 
   })
 );
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(morgan("dev"));
