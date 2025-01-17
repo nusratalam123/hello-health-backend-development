@@ -10,7 +10,7 @@ const app = express();
 //middleware
 app.use(
   cors({
-    origin: "http://localhost:3000", // Replace with your frontend URL
+    origin: "https://hello-health-backend.vercel.app", // Replace with your frontend URL
     credentials: true, // Allow cookies and credentials
   })
 );
