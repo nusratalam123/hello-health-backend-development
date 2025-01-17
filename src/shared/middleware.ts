@@ -8,25 +8,12 @@ import path from "path";
 const app = express();
 
 //middleware
-//Allowed origins for CORS
-const allowedOrigins = [
-  "",  
-];
-
 app.use(
   cors({
-    origin: (origin, callback) => {
-      // Allow requests with no origin (e.g., mobile apps or Postman)
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true, 
+    origin: "*", // Replace with your frontend URL
+    credentials: true, // Allow cookies and credentials
   })
 );
-
 app.use(cookieParser());
 app.use(express.json());
 app.use(morgan("dev"));
