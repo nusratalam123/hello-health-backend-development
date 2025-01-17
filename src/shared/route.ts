@@ -13,6 +13,8 @@ import healthSuggestionRoutes from "../routes/healthSuggestionData.route";
 import productRoutes from "../routes/product.route";
 import orderRoutes from "../routes/order.route";
 import mediRoutes from "../routes/medication1.route";
+import foodAnalysisRoutes from "../routes/FoodAnalysis.route";
+
 
 
 
@@ -38,6 +40,7 @@ router.use("/health-suggestion", healthSuggestionRoutes);
 router.use("/product", productRoutes);
 router.use("/order", orderRoutes);
 router.use("/medi", mediRoutes);
+router.use("/food-analysis", foodAnalysisRoutes);
 
 
 // Handle not found
