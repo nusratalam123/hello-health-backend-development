@@ -10,7 +10,7 @@ const app = express();
 //middleware
 //Allowed origins for CORS
 const allowedOrigins = [
-  "*",  
+  "",  
 ];
 
 app.use(
