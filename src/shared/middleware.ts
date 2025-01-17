@@ -10,7 +10,7 @@ const app = express();
 //middleware
 app.use(
   cors({
-    origin: "https://hello-health-backend.vercel.app", // Replace with your frontend URL
+    origin: "https://hello-health-iosf-git-main-nusrat-alams-projects.vercel.app", // Replace with your frontend URL
     credentials: true, // Allow cookies and credentials
   })
 );
